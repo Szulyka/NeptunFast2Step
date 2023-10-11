@@ -9,7 +9,7 @@ imap_server.login('horogszegi.palko@gmail.com', 'bzdm jufm eehs ltda')
 imap_server.select('inbox')
 
 # Search for emails
-result, email_ids = imap_server.search(None, 'FROM "do-not-reply@directmail2.binance.com" SUBJECT "[Binance] Your ID Document has Expired - 2023-10-02 00:04:38 (UTC)"')
+result, email_ids = imap_server.search(None, 'FROM "noreply@neptun.elte.hu" SUBJECT "Neptun"')
 
 if result == 'OK':
     # Get the latest email ID
@@ -25,6 +25,18 @@ if result == 'OK':
         
         # Extract the text from the email body
         email_text = email_message.get_payload()
+    
+
+        email_text = email_text.replace('=', '')
+        numList = []
+        for i in range(len(email_text)):
+            
+            if i > 30 and email_text[i].isdigit() and len(numList) < 22:
+                numList.append(email_text[i])
+                
+        numList = numList[13:]
+        strCode = ('').join(numList)
+        print(strCode)
         
         # Process the email text as needed
         print(email_text)
