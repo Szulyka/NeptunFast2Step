@@ -3,20 +3,19 @@ import email
 import time
 import pyperclip 
 
-#TODO: in the while cycle, we cannot recieve the latest e-mail
-
-imapServer = imaplib.IMAP4_SSL('imap.gmail.com')
-
-#your e-mail adress, and password
-#for the password, you need to make an app password through google -> profile settings -> security -> app passwords 
-#this is needed to surpass two-step authentication at Google
-#do not share that code with anyone, it is a security risk
-imapServer.login('horogszegi.palko@gmail.com', 'bzdm jufm eehs ltda')
-#example: -------'smith.adam@gmail.com', '4 times 4 digit app password'
-
-imapServer.select('inbox')
+#this program connect to your email account, gets the content latest Neptun email every 4 seconds and copies the security 6-digit code to the clipboard
 
 while True:
+    imapServer = imaplib.IMAP4_SSL('imap.gmail.com')
+
+    #your e-mail adress, and password
+    #for the password, you need to make an app password through google -> profile settings -> security -> app passwords 
+    #this is needed to surpass two-step authentication at Google
+    #do not share that code with anyone, it is a security risk
+    imapServer.login('horogszegi.palko@gmail.com', 'bzdm jufm eehs ltda')
+    #example: -------'smith.adam@gmail.com', '4 times 4 digit app password'
+
+    imapServer.select('inbox')
     #example: ---------------------------------------"noreply@neptun.elte.hu"         "Neptun"       <- don't add utf-8 chars, also subset of words of the subject is enough
     result, emailIds = imapServer.search(None, 'FROM "noreply@neptun.elte.hu" SUBJECT "Neptun"')
 
@@ -47,7 +46,7 @@ while True:
         numList = numList[13:]
         codeWithoutFirstThree = numList[3:]
         codeWithoutFirstThree = ('').join(codeWithoutFirstThree)
-        #let"s put it onto clipboard
+        #let's put it onto clipboard
         pyperclip.copy(codeWithoutFirstThree)
         print("Code to be pasted: ", codeWithoutFirstThree)
         
@@ -55,8 +54,8 @@ while True:
         print(emailText)
     else:
         print("No email found")
+        
+    #logout in every iteration, probably there is a better way. This ensures that you will get the latest email every iteration
+    imapServer.logout()
             
-    time.sleep(5)
-
-#Close the IMAP connection - for future exit button
-imapServer.logout()
+    time.sleep(4)
