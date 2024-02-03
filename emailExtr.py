@@ -54,8 +54,8 @@ while True:
             # Extract the text from the e-mail body
             emailText = emailMessage.get_payload()
             decodedEmailText = quopri.decodestring(emailText).decode('utf-8')
+
             # whole e-mail
-            print("EMAIL CONTENT")
             print(decodedEmailText)
 
             digitsOfCode = []
@@ -66,7 +66,6 @@ while True:
                     break
 
             digitsOfCode = ''.join(digitsOfCode)
-            print(digitsOfCode)
             # let's put it onto clipboard
             pyperclip.copy(digitsOfCode)
             print("Code to be pasted: ", digitsOfCode)
