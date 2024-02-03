@@ -1,0 +1,11 @@
+If you want to run the script automatically:
+0. You need to download Python, it is available in the Microsoft store
+1. Open Task Scheduler in Windows
+2. Create a Basic Task on the right
+3. Set the Trigger to whewn you log in
+4. Set a slight delay like 30 seconds
+5. Choose "Start a program" as the action
+6. Browse for the Python exe (eg: C:\Python311\python.exe)
+7. In argument, write where the emailExtr.py is (C:\Users\username\Downloads\Extractor\emailExtr.py) !full path!
+
+If it is done, on the next boot, program will start in a terminal
