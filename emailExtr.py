@@ -30,7 +30,7 @@ imapServer = imaplib.IMAP4_SSL('imap.gmail.com')
 # for the password, you need to make an app password through Google -> profile settings -> security -> app passwords
 # this is needed to surpass two-step authentication at Google
 # do not share that code with anyone, it is a security risk
-imapServer.login('horogszegi.palko@gmail.com', 'kojh vkyu mznj zcdo')
+imapServer.login('', '')
 # example: -------'smith.adam@gmail.com', '4 times 4 digit app password'
 
 latestEmailId = ""
